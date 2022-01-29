@@ -1,36 +1,51 @@
 import appConfig from  '../config.json';
 import { Box, Button, Image, Text, TextField } from '@skynexui/components';
+import React, { useState } from 'react';
+import {useRouter } from 'next/router';
 
-function GlobalStyle() {
-    return (
-        <style global jsx>{`
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        list-style: none;
-      }
-      body {
-        font-family: 'Open Sans', sans-serif;
-      }
-      /* App fit Height */
-      html,
-      body,
-      #__next {
-        min-height: 100vh;
-        display: flex;
-        flex: 1;
-      }
-      #__next {
-        flex: 1;
-      }
-      #__next > * {
-        flex: 1;
-      }
-      /* ./App fit Height */
-    `}</style>
-    )
+
+function SsjGif() {
+  return (
+    <>
+     <img src="https://c.tenor.com/jDxcgLJt0MQAAAAC/vegito-final.gif"/>
+     <style jsx>{`
+     img {
+       display: flex;
+       width: 100px;
+       margin-bottom: 550px;
+       border-radius: 20px;
+       
+      
+       
+     }
+    
+     
+     
+     `}
+
+
+
+     </style>
+     </>
+  )
 }
+function Dragon() {
+  return (
+    <>
+     <img src="http://68.media.tumblr.com/15704d50d3176421a57b71f20a63f4a1/tumblr_ohbjnaiypO1r72ht7o1_540.gif"/>
+     <style jsx>{`
+     img {
+       width: 200px;
+       border-radius: 20px;
+       
+     }
+    
+     `}
+     </style>
+     </>
+  )
+}
+
 
 
 function Title(props) {
@@ -70,11 +85,14 @@ function HomePage() {
   */
 
   export default function PaginaInicial() {
-    const username = 'felipematheus1337'
+    //const username = 'felipematheus1337'
+    const [username,setUsername] = React.useState('');
+    const roteamento = useRouter();
+    
   
     return (
       <>
-        <GlobalStyle />
+        
         <Box
           styleSheet={{
             display: 'flex',
@@ -82,12 +100,17 @@ function HomePage() {
             justifyContent: 'center',
             backgroundColor: appConfig.theme.colors.primary[500],
             backgroundImage:
-              'url(https://virtualbackgrounds.site/wp-content/uploads/2020/08/the-matrix-digital-rain.jpg)',
+            'url(https://github.com/felipematheus1337/aluracord-dbz/blob/master/dbz1.jpg?raw=true)',
             backgroundRepeat: 'no-repeat',
             backgroundSize: 'cover',
-            backgroundBlendMode: 'multiply'
+            backgroundBlendMode: 'multiply',
+            
           }}
-        >
+          
+          
+          >
+      
+          <SsjGif/>
           <Box
             styleSheet={{
               display: 'flex',
@@ -103,12 +126,18 @@ function HomePage() {
               padding: '32px',
               margin: '16px',
               boxShadow: '0 2px 10px 0 rgb(0 0 0 / 20%)',
-              backgroundColor: appConfig.theme.colors.neutrals[700]
+              backgroundColor: appConfig.theme.colors.neutrals[700],
+              opacity: 0.96,
             }}
           >
+         
             {/* Formulário */}
             <Box
               as="form"
+              onSubmit={function (e) {
+                e.preventDefault();
+                roteamento.push('/chat')
+              }}
               styleSheet={{
                 display: 'flex',
                 flexDirection: 'column',
@@ -116,10 +145,12 @@ function HomePage() {
                 justifyContent: 'center',
                 width: { xs: '100%', sm: '50%' },
                 textAlign: 'center',
-                marginBottom: '32px'
+                marginBottom: '32px',
               }}
             >
-              <Title tag="h2">Boas vindo de volta!</Title>
+                 <Dragon/>
+              <Title tag="h2">Boas vindas de volta!</Title>
+              
               <Text
                 variant="body3"
                 styleSheet={{
@@ -127,27 +158,38 @@ function HomePage() {
                   color: appConfig.theme.colors.neutrals[300]
                 }}
               >
+                
                 {appConfig.name}
               </Text>
-  
+              
+              
+             
+            
               <TextField
+              value={username}
+              onChange={function (event) {
+                const valor = event.target.value;
+                setUsername(valor);
+                
+              }}
                 fullWidth
                 textFieldColors={{
                   neutral: {
                     textColor: appConfig.theme.colors.neutrals[200],
-                    mainColor: appConfig.theme.colors.neutrals[900],
+                    mainColor: appConfig.theme.colors.neutrals[500],
                     mainColorHighlight: appConfig.theme.colors.primary[500],
                     backgroundColor: appConfig.theme.colors.neutrals[800]
                   }
                 }}
               />
+              
               <Button
                 type="submit"
                 label="Entrar"
                 fullWidth
                 buttonColors={{
                   contrastColor: appConfig.theme.colors.neutrals['000'],
-                  mainColor: appConfig.theme.colors.primary[500],
+                  mainColor: appConfig.theme.colors.primary[400],
                   mainColorLight: appConfig.theme.colors.primary[400],
                   mainColorStrong: appConfig.theme.colors.primary[600]
                 }}
@@ -188,6 +230,7 @@ function HomePage() {
                 }}
               >
                 {username}
+              
               </Text>
             </Box>
             {/* Photo Area */}
