@@ -86,7 +86,7 @@ function HomePage() {
 
   export default function PaginaInicial() {
     //const username = 'felipematheus1337'
-    const [username,setUsername] = React.useState('');
+    const [username,setUsername] = React.useState('felipematheus1337');
     const roteamento = useRouter();
     
   
@@ -136,7 +136,7 @@ function HomePage() {
               as="form"
               onSubmit={function (e) {
                 e.preventDefault();
-                roteamento.push('/chat')
+                roteamento.push(`/chat?username=${username}`);
               }}
               styleSheet={{
                 display: 'flex',
